@@ -13,7 +13,7 @@ namespace IBASEmployeeService.Controllers
             _logger = logger;
         }
 
-
+    
         [HttpGet("GetEmployees")]
         public IEnumerable<Employee> Get()
         {
@@ -44,10 +44,76 @@ namespace IBASEmployeeService.Controllers
                     Id = 2,
                     Name = "Support"
                 }
+            },
+            
+            new Employee() {
+                Id = "24", 
+                Name = "Anders Andersen", 
+                Email = "anan@ibas.dk", 
+                Department = new Department() {
+                    Id = 3, 
+                    Name = "IT"
+                }
+            },
+            new Employee()
+            {
+                Id = "25", 
+                Name = "Bent Bentsen", 
+                Email = "bebe@ibas.dk", 
+                Department = new Department() {
+                    Id = 3, 
+                    Name = "IT"
+                }
+            },
+            new Employee()
+            {
+                Id = "26", 
+                Name = "Clara Clausen", 
+                Email = "clcl@ibas.dk", 
+                Department = new Department() {
+                    Id = 3, 
+                    Name = "IT"
+                }
+            },
+
+            
+            new Employee()
+            {
+                Id = "27", 
+                Name = "Dorte Davidsen", 
+                Email = "doda@ibas.dk", 
+                Department = new Department() {
+                    Id = 4, 
+                    Name = "Kantinen"
+                }
+            },
+            new Employee()
+            {
+                Id = "28", 
+                Name = "Erik Eriksen", 
+                Email = "erer@ibas.dk", 
+                Department = new Department() {
+                    Id = 4, 
+                    Name = "Kantinen"
+                }
             }
+            
         };
             return employees;
         }
+
+        [HttpGet()]
+        public IEnumerable<Employee> GetByDepartment(int departmentId)
+        {
+            var allEmployees = Get();
+            
+            var filteredList = allEmployees
+                .Where(e => e.Department.Id == departmentId)
+                .ToList();
+
+            return filteredList;
+        }
+        
     }
 
 
